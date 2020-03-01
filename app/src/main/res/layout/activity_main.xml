@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/MathButton"
+        android:id="@+id/PDFButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Math Book"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MathButton"
+        app:layout_constraintTop_toBottomOf="@+id/PDFButton"
         app:layout_constraintVertical_bias="0.196" />
 
     <Button
@@ -40,6 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.824"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MathButton"
+        app:layout_constraintTop_toBottomOf="@+id/PDFButton"
         app:layout_constraintVertical_bias="0.196" />
 </androidx.constraintlayout.widget.ConstraintLayout>

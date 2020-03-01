@@ -8,14 +8,27 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+    private Button PDFbutton;
+
+    private Button postTest;
+    private Button preTest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button) findViewById(R.id.MathButton);
-        button.setOnClickListener(new View.OnClickListener() {
+        PDFbutton = (Button) findViewById(R.id.PDFButton);
+        postTest = (Button) findViewById(R.id.PostButton);
+
+        postTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openPost();
+            }
+        });
+
+
+        PDFbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openPDF();
@@ -26,4 +39,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(MainActivity.this,PDFViewer.class);
         startActivity(i);
     }
+    private void openPost(){
+       Intent i = new Intent(MainActivity.this,postViewer.class);
+      startActivity(i);
+    }
+
 }
