@@ -2,6 +2,7 @@ package com.example.bookapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -15,11 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
-import java.util.ArrayList;
 
-import static java.lang.Math.floor;
-
-public class postViewer extends AppCompatActivity  {
+public class preViewer extends AppCompatActivity  {
     int q = 0;
     Button choice1,choice2,choice3,choice4;
     TextView score,question;
@@ -108,7 +106,7 @@ public class postViewer extends AppCompatActivity  {
         mAnswer = mQuestions.getAnswer(n);
     }
     private void gameOver(){
-        AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
+        AlertDialog.Builder adb = new AlertDialog.Builder(preViewer.this);
         adb.setMessage("game over fool").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -131,7 +129,7 @@ public class postViewer extends AppCompatActivity  {
             LineNumberReader lin = new LineNumberReader(new InputStreamReader(in));
             String line;
             int qCount = 0;
-          int cCount = 0;
+            int cCount = 0;
             int aCount = 0;
 
             while((line = lin.readLine())!= null) {
@@ -149,7 +147,7 @@ public class postViewer extends AppCompatActivity  {
                 }
                 // load choices
                 if (line.startsWith("&")){
-                        questions.mChoices[cCount][0]=line.substring(1);
+                    questions.mChoices[cCount][0]=line.substring(1);
                 }
                 if (line.startsWith("!")){
                     questions.mChoices[cCount][1]=line.substring(1);

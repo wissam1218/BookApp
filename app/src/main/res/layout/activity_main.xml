@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.155" />
 
     <Button
-        android:id="@+id/PreButton"
+        android:id="@+id/preButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pre-test"

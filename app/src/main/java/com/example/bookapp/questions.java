@@ -4,7 +4,7 @@ public class questions {
 
     public static String mQuestions[] = new String[100];
     public static String mAnswers[] = new String[100];
-    public static String mChoices[][] = new String[4][100];
+    public static String mChoices[][] = new String[100][400];
 
     public String getQuestions(int n){
         String question = mQuestions[n];
