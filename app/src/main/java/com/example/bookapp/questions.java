@@ -1,41 +1,10 @@
 package com.example.bookapp;
 
-import android.content.res.AssetManager;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 public class questions {
 
-    public String mQuestions[]    ={"what is question 1","what is question 2",
-            "what is question 3","what is question 4",
-            "what is question 5","what is question 6",
-            "what is question 7","what is question 8","what is question 9"};
-
-
-    public void loadQuestions(){
-        BufferedReader br = null;
-
-
-
-    }
-
-    private String mChoices[][] = {
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice3","choice4"},
-            {"choice1","choice2","choice2","choice3"},
-            {"choice1","choice2","choice3","choice4"}
-            };
-    private String mAnswers[] = {"choice1","choice1","choice1","choice1","choice1","choice1","choice1","choice1","choice1"};
+    public static String mQuestions[] = new String[100];
+    public static String mAnswers[] = new String[100];
+    public static String mChoices[][] = new String[4][100];
 
     public String getQuestions(int n){
         String question = mQuestions[n];
@@ -65,6 +34,5 @@ public class questions {
         String ans = mAnswers[n];
         return ans;
     }
-
 
 }
