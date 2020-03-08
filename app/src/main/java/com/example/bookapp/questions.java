@@ -1,15 +1,9 @@
 package com.example.bookapp;
 
 public class questions {
-
-    // get size for array to store the questions
-    public void getQSizePost(){
-
-    }
-
-    public static String mQuestions[] = new String[0];
-    public static String mAnswers[] = new String[0];
-    public static String mChoices[][] = new String[3][3];
+    public static String mQuestions[] = new String[100];
+    public static String mAnswers[] = new String[100];
+    public static String mChoices[][] = new String[100][4];
 
     public String getQuestions(int n){
         String question = mQuestions[n];

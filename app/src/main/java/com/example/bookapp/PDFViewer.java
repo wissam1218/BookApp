@@ -30,13 +30,7 @@ public class PDFViewer extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfviewer);
-        if (!hasPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
-            // Permission ask
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 111);
-            loadPDF();
-        } else {
-            loadPDF();
-        }
+        loadPDF();
     }
     private void loadPDF(){
         File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/math.pdf");
@@ -58,16 +52,7 @@ public class PDFViewer extends AppCompatActivity {
     }
 
 
-    public static boolean hasPermissions(Context context, String... permissions) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
-            for (String permission : permissions) {
-                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+
 
 
 

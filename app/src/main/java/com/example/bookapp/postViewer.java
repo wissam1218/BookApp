@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -26,7 +27,8 @@ import java.io.LineNumberReader;
 import java.nio.Buffer;
 import java.util.ArrayList;
 
-import static com.example.bookapp.PDFViewer.hasPermissions;
+import static com.example.bookapp.MainActivity.hasPermissions;
+
 import static java.lang.Math.floor;
 
 public class postViewer extends AppCompatActivity  {
@@ -49,7 +51,10 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
-
+//        if (!hasPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
+//            // Permission ask
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 111);
+//        }
         loadQuestions();
         updateQuestion(q);
         score.setText("Score: " + mScore);
@@ -57,8 +62,9 @@ public class postViewer extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 q++;
+                // .getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))
                 if(choice1.getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))){
-                    mScore++;
+                   mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
                 } else{
@@ -118,6 +124,52 @@ public class postViewer extends AppCompatActivity  {
         choice4.setText(mQuestions.getChoice4(n));
         mAnswer = mQuestions.getAnswer(n);
     }
+
+
+
+    public void loadQuestions(){
+
+        int qCount=0;
+        int cCount = 0;
+        int ansCount = 0;
+
+        try{
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest.txt");
+            LineNumberReader lin = new LineNumberReader(new FileReader(file));
+            String line;
+            while((line = lin.readLine()) != null) {
+                // load question
+                if (line.startsWith("$")) {
+                    if(line.endsWith(">")){
+                        cCount++;
+                    }
+                    questions.mQuestions[qCount] = line;
+                    qCount++;
+                }
+                // load choices
+                else if (line.startsWith("&")){
+                    questions.mChoices[cCount][0]=line;
+                }
+                else if (line.startsWith("!")){
+                    questions.mChoices[cCount][1]=line;
+                }
+                else if (line.startsWith("*")){
+                    questions.mChoices[cCount][2]=line;
+                }
+                else if (line.startsWith("@")){
+                    questions.mChoices[cCount][3]=line;
+                }
+                // load answers
+                else if (line.startsWith(".")) {
+                    questions.mAnswers[ansCount] = line;
+                    ansCount++;
+                }
+                else return;
+            }
+        }
+        catch(IOException e){
+        }
+    }
     private void gameOver(){
         AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
         adb.setMessage("game over fool").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
@@ -132,61 +184,5 @@ public class postViewer extends AppCompatActivity  {
             }
         });
         adb.show();
-    }
-
-    public void loadQuestions(){
-        FileInputStream is;
-        BufferedReader reader;
-
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/postTest.txt");
-
-        try{
-            is = new FileInputStream(file);
-            reader = new BufferedReader(new InputStreamReader(is));
-            String line = reader.readLine();
-            //LineNumberReader lin = new LineNumberReader(new FileReader);
-
-            int qCount = 0;
-            int cCount = 0;
-            int aCount = 0;
-
-
-            while(line != null) {
-                // load question
-                if (line.startsWith("$")) {
-                    if(line.endsWith(">")){
-                        cCount++;
-                    }
-                    questions.mQuestions[qCount] = reader.readLine();
-                    qCount++;
-                }
-                // load choices
-                if (line.startsWith("&")){
-                        questions.mChoices[cCount][0]=line.substring(1);
-                }
-                if (line.startsWith("!")){
-                    questions.mChoices[cCount][1]=line.substring(1);
-                }
-                if (line.startsWith("*")){
-                    questions.mChoices[cCount][2]=line.substring(1);
-                }
-                if (line.startsWith("@")){
-                    questions.mChoices[cCount][3]=line.substring(1);
-                }
-                // load answers
-                if (line.startsWith(".")) {
-                    questions.mAnswers[aCount] = line.substring(1);
-                    aCount++;
-                }
-
-            }
-
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-    }
-    public void done(){
-        Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
     }
 }
