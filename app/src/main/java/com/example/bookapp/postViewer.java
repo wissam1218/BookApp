@@ -2,21 +2,31 @@ package com.example.bookapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
+import static com.example.bookapp.PDFViewer.hasPermissions;
 import static java.lang.Math.floor;
 
 public class postViewer extends AppCompatActivity  {
@@ -39,6 +49,7 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
+
         loadQuestions();
         updateQuestion(q);
         score.setText("Score: " + mScore);
@@ -124,27 +135,29 @@ public class postViewer extends AppCompatActivity  {
     }
 
     public void loadQuestions(){
-        AssetManager assets = getAssets();
+        FileInputStream is;
+        BufferedReader reader;
+
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/postTest.txt");
 
         try{
-            InputStream in = assets.open("postTest.txt");
-            LineNumberReader lin = new LineNumberReader(new InputStreamReader(in));
-            String line;
+            is = new FileInputStream(file);
+            reader = new BufferedReader(new InputStreamReader(is));
+            String line = reader.readLine();
+            //LineNumberReader lin = new LineNumberReader(new FileReader);
+
             int qCount = 0;
-          int cCount = 0;
+            int cCount = 0;
             int aCount = 0;
 
-            while((line = lin.readLine())!= null) {
-                // increment choice counter (excluding the first question)
-                if(line.endsWith(">")){
-                    cCount=cCount+1;
-                }
+
+            while(line != null) {
                 // load question
                 if (line.startsWith("$")) {
                     if(line.endsWith(">")){
-                        line = line.substring(0,line.length()-1);
+                        cCount++;
                     }
-                    questions.mQuestions[qCount] = line.substring(1);
+                    questions.mQuestions[qCount] = reader.readLine();
                     qCount++;
                 }
                 // load choices
