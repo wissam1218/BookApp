@@ -1,10 +1,18 @@
 package com.example.bookapp;
 
+import android.os.Environment;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+
 public class questions {
+
 
     public static String mQuestions[] = new String[100];
     public static String mAnswers[] = new String[100];
-    public static String mChoices[][] = new String[4][100];
+    public static String mChoices[][] = new String[100][4];
 
     public String getQuestions(int n){
         String question = mQuestions[n];
