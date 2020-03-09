@@ -26,18 +26,24 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.example.bookapp.MainActivity.hasPermissions;
 
 import static java.lang.Math.floor;
 
 public class postViewer extends AppCompatActivity  {
+
     int q = 0;
     Button choice1,choice2,choice3,choice4;
     TextView score,question;
     private questions mQuestions = new questions();
     private String mAnswer;
     private int mScore = 0;
+
+
+
+    int incorrect = 0;
 
 
 
@@ -51,19 +57,16 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
-//        if (!hasPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
-//            // Permission ask
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 111);
-//        }
         loadQuestions();
+
         updateQuestion(q);
         score.setText("Score: " + mScore);
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 q++;
-                // .getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))
-                if(choice1.getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))){
+                if(choice1.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
+                    Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
                    mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
@@ -76,7 +79,8 @@ public class postViewer extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 q++;
-                if(choice2.getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))){
+                if(choice2.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
+                    Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
@@ -91,7 +95,8 @@ public class postViewer extends AppCompatActivity  {
             public void onClick(View v) {
 
                 q++;
-                if(choice3.getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))){
+                if(choice3.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
+                    Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
@@ -104,7 +109,8 @@ public class postViewer extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 q++;
-                if(choice4.getText().toString().substring(1).equalsIgnoreCase(mAnswer.substring(1))){
+                if(choice4.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
+                    Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
@@ -137,27 +143,28 @@ public class postViewer extends AppCompatActivity  {
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest.txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
+
             while((line = lin.readLine()) != null) {
                 // load question
                 if (line.startsWith("$")) {
                     if(line.endsWith(">")){
                         cCount++;
                     }
-                    questions.mQuestions[qCount] = line;
+                    questions.mQuestions[qCount] = line.substring(1);
                     qCount++;
                 }
                 // load choices
                 else if (line.startsWith("&")){
-                    questions.mChoices[cCount][0]=line;
+                    questions.mChoices[cCount][0]=line.substring(1);
                 }
                 else if (line.startsWith("!")){
-                    questions.mChoices[cCount][1]=line;
+                    questions.mChoices[cCount][1]=line.substring(1);
                 }
                 else if (line.startsWith("*")){
-                    questions.mChoices[cCount][2]=line;
+                    questions.mChoices[cCount][2] =line.substring(1);
                 }
                 else if (line.startsWith("@")){
-                    questions.mChoices[cCount][3]=line;
+                    questions.mChoices[cCount][3]=line.substring(1);
                 }
                 // load answers
                 else if (line.startsWith(".")) {
@@ -166,13 +173,14 @@ public class postViewer extends AppCompatActivity  {
                 }
                 else return;
             }
+            lin.close();
         }
-        catch(IOException e){
+        catch(IOException e) {
         }
     }
     private void gameOver(){
         AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
-        adb.setMessage("game over fool").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
+        adb.setMessage("Game Over.").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startActivity(new Intent(getApplicationContext(), postViewer.class));

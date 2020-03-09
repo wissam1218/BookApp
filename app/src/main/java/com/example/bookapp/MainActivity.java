@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         postTest = (Button) findViewById(R.id.PostButton);
         preTest = (Button) findViewById(R.id.preButton);
 
-
-
         preTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
