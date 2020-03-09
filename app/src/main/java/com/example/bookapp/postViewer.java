@@ -26,6 +26,9 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static com.example.bookapp.MainActivity.hasPermissions;
@@ -135,9 +138,12 @@ public class postViewer extends AppCompatActivity  {
 
     public void loadQuestions(){
 
+        // these counters are required so that each question set is loaded into the correct position
         int qCount=0;
         int cCount = 0;
         int ansCount = 0;
+
+        Integer[] cArr = {0,1,2,3};
 
         try{
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest.txt");
@@ -155,21 +161,25 @@ public class postViewer extends AppCompatActivity  {
                 }
                 // load choices
                 else if (line.startsWith("&")){
-                    questions.mChoices[cCount][0]=line.substring(1);
+                    questions.mChoices[cCount][cArr[0]]=line.substring(1);
                 }
                 else if (line.startsWith("!")){
-                    questions.mChoices[cCount][1]=line.substring(1);
+                    questions.mChoices[cCount][cArr[1]]=line.substring(1);
                 }
                 else if (line.startsWith("*")){
-                    questions.mChoices[cCount][2] =line.substring(1);
+                    questions.mChoices[cCount][cArr[2]] =line.substring(1);
                 }
                 else if (line.startsWith("@")){
-                    questions.mChoices[cCount][3]=line.substring(1);
+                    questions.mChoices[cCount][cArr[3]]=line.substring(1);
                 }
                 // load answers
                 else if (line.startsWith(".")) {
                     questions.mAnswers[ansCount] = line;
                     ansCount++;
+                    // shuffle choice array
+                    List<Integer> intList = Arrays.asList(cArr);
+                    Collections.shuffle(intList);
+                    intList.toArray(cArr);
                 }
                 else return;
             }
