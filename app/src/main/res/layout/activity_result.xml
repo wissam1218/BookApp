@@ -35,16 +35,34 @@
         android:textSize="20sp" />
 
     <Button
-        android:layout_below="@+id/outOf"
         android:id="@+id/retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Retry Quiz"
-        android:padding="8dp"
+        android:layout_below="@+id/outOf"
+        android:layout_centerHorizontal="true"
         android:layout_margin="4dp"
-        android:textColor="#fff"
+        android:layout_marginTop="147dp"
+        android:layout_marginBottom="4dp"
         android:background="#4CAF50"
-        android:textSize="18sp"
         android:fontFamily="casual"
-        android:layout_centerHorizontal="true"/>
+        android:padding="8dp"
+        android:text="Retry Quiz"
+        android:textColor="#fff"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/nextBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/retry"
+        android:layout_alignEnd="@+id/retry"
+        android:layout_marginTop="83dp"
+        android:layout_marginEnd="-3dp"
+        android:layout_marginBottom="4dp"
+        android:background="#4CAF50"
+        android:fontFamily="casual"
+        android:padding="8dp"
+        android:text="Next Quiz"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 </RelativeLayout>

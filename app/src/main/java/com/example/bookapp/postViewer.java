@@ -146,7 +146,7 @@ public class postViewer extends AppCompatActivity  {
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest.txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 

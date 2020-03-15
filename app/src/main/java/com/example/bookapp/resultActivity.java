@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import static com.example.bookapp.postViewer.mScore;
 import static com.example.bookapp.postViewer.questionNum;
+import static com.example.bookapp.postViewer.testNum;
 
 public class resultActivity extends AppCompatActivity {
     TextView mGrade, mFinalScore;
-    Button mRetryButton;
+    Button mRetryButton, nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,17 @@ public class resultActivity extends AppCompatActivity {
         mGrade = (TextView)findViewById(R.id.grade);
         mFinalScore = (TextView)findViewById(R.id.outOf);
         mRetryButton = (Button)findViewById(R.id.retry);
+        nextBtn = (Button) findViewById(R.id.nextBtn);
+
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testNum++;
+                questionNum = 0;
+                Intent intent = new Intent(resultActivity.this, postViewer.class);
+                startActivity(intent);
+            }
+        });
 
         mRetryButton.setOnClickListener(new View.OnClickListener() {
             @Override
