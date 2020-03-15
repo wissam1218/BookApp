@@ -42,13 +42,11 @@ public class postViewer extends AppCompatActivity  {
     TextView score,question;
     private questions mQuestions = new questions();
     private String mAnswer;
-    private int mScore = 0;
-
-
+    public static int mScore = 0;
+    Button loadBtn;
+    public static int questionNum=0;
 
     int incorrect = 0;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +58,18 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
+        loadBtn = findViewById(R.id.loadBtn);
         loadQuestions();
-
         updateQuestion(q);
+        // end of questions. start result activity
+//        if(mQuestions.mQuestions.length <= questionNum){
+//            Intent i = new Intent(postViewer.this, resultActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putInt("Final Score", mScore);
+//            i.putExtras(bundle);
+//            postViewer.this.finish();
+//            startActivity(i);
+//        }
         score.setText("Score: " + mScore);
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,9 +80,7 @@ public class postViewer extends AppCompatActivity  {
                    mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
-                }
+                }else gameOver();
             }
         });
         choice2.setOnClickListener(new View.OnClickListener() {
@@ -87,10 +92,7 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
-                }
-
+                } else gameOver();
             }
         });
         choice3.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +105,7 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
-                }
+                } else gameOver();
             }
         });
         choice4.setOnClickListener(new View.OnClickListener() {
@@ -117,21 +117,27 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
-                }
+                }  else gameOver();
             }
         });
-
     }
 
     private void updateQuestion(int n){
-        question.setText(mQuestions.getQuestions(n));
-        choice1.setText(mQuestions.getChoice1(n));
-        choice2.setText(mQuestions.getChoice2(n));
-        choice3.setText(mQuestions.getChoice3(n));
-        choice4.setText(mQuestions.getChoice4(n));
-        mAnswer = mQuestions.getAnswer(n);
+        // check if we are not outside array bounds for questions
+        if(questionNum<mQuestions.mQuestions.length){
+           question.setText(mQuestions.getQuestions(n));
+           choice1.setText(mQuestions.getChoice1(n));
+           choice2.setText(mQuestions.getChoice2(n));
+           choice3.setText(mQuestions.getChoice3(n));
+           choice4.setText(mQuestions.getChoice4(n));
+           mAnswer = mQuestions.getAnswer(n);
+           questionNum++;
+        }
+        else {
+            Intent intent = new Intent(postViewer.this, resultActivity.class);
+            intent.putExtra("score", mScore); // pass the score
+            startActivity(intent);
+        }
     }
 
 
@@ -140,7 +146,7 @@ public class postViewer extends AppCompatActivity  {
 
         // these counters are required so that each question set is loaded into the correct position
         int qCount=0;
-        int cCount = 0;
+        int cCount = -1;
         int ansCount = 0;
 
         Integer[] cArr = {0,1,2,3};

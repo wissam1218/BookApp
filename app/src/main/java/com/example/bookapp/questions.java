@@ -2,17 +2,14 @@ package com.example.bookapp;
 
 import android.os.Environment;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.LineNumberReader;
+
 
 public class questions {
-
-
-    public static String mQuestions[] = new String[100];
-    public static String mAnswers[] = new String[100];
-    public static String mChoices[][] = new String[100][4];
+    final static int QA = 9;
+    final static int OPTIONS = QA * 4;
+    public static String mQuestions[] = new String[QA+1];
+    public static String mAnswers[] = new String[QA+1];
+    public static String mChoices[][] = new String[OPTIONS][4];
 
     public String getQuestions(int n){
         String question = mQuestions[n];
