@@ -46,8 +46,7 @@ public class postViewer extends AppCompatActivity  {
     Button loadBtn;
     public static int questionNum=0;
 
-    int incorrect = 0;
-
+    public static int testNum = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,15 +60,6 @@ public class postViewer extends AppCompatActivity  {
         loadBtn = findViewById(R.id.loadBtn);
         loadQuestions();
         updateQuestion(q);
-        // end of questions. start result activity
-//        if(mQuestions.mQuestions.length <= questionNum){
-//            Intent i = new Intent(postViewer.this, resultActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("Final Score", mScore);
-//            i.putExtras(bundle);
-//            postViewer.this.finish();
-//            startActivity(i);
-//        }
         score.setText("Score: " + mScore);
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,23 +124,27 @@ public class postViewer extends AppCompatActivity  {
            questionNum++;
         }
         else {
-            Intent intent = new Intent(postViewer.this, resultActivity.class);
-            intent.putExtra("score", mScore); // pass the score
-            startActivity(intent);
+            Intent i = new Intent(postViewer.this, resultActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("Final Score: ", mScore);
+            i.putExtras(bundle);
+            postViewer.this.finish();
+            startActivity(i);
+
+//            Intent intent = new Intent(postViewer.this, resultActivity.class);
+//            intent.putExtra("score", mScore); // pass the score
+//            startActivity(intent);
         }
     }
 
 
 
     public void loadQuestions(){
-
         // these counters are required so that each question set is loaded into the correct position
         int qCount=0;
         int cCount = -1;
         int ansCount = 0;
-
         Integer[] cArr = {0,1,2,3};
-
         try{
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest.txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
