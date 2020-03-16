@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -70,7 +71,11 @@ public class postViewer extends AppCompatActivity  {
                    mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                }else gameOver();
+                }else{
+                    gameOver();
+                    score.setText("Score: " + mScore);
+                    updateQuestion(q);
+                }
             }
         });
         choice2.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +87,11 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else gameOver();
+                } else{
+                    gameOver();
+                    score.setText("Score: " + mScore);
+                    updateQuestion(q);
+                }
             }
         });
         choice3.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +104,11 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                } else gameOver();
+                } else{
+                    gameOver();
+                    score.setText("Score: " + mScore);
+                    updateQuestion(q);
+                }
             }
         });
         choice4.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +120,11 @@ public class postViewer extends AppCompatActivity  {
                     mScore++;
                     score.setText("Score: " + mScore);
                     updateQuestion(q);
-                }  else gameOver();
+                }  else{
+                    gameOver();
+                    score.setText("Score: " + mScore);
+                    updateQuestion(q);
+                }
             }
         });
     }
@@ -189,18 +206,23 @@ public class postViewer extends AppCompatActivity  {
         }
     }
     private void gameOver(){
-        AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
-        adb.setMessage("Game Over.").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), postViewer.class));
-            }
-        }).setNegativeButton("exit?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        adb.show();
-    }
+        int incorrect = 0;
+        if(incorrect > 2){
+            AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
+            adb.setMessage("Game Over.").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(getApplicationContext(), postViewer.class));
+                }
+            }).setNegativeButton("exit?", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+            adb.show();
+        } else return;
+        }
+
+
 }

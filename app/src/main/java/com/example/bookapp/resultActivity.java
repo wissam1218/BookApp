@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,25 +25,57 @@ import static com.example.bookapp.postViewer.mScore;
 import static com.example.bookapp.postViewer.questionNum;
 import static com.example.bookapp.postViewer.testNum;
 
+import static com.example.bookapp.questions.QA;
+
 public class resultActivity extends AppCompatActivity {
+
+    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+
+    public static File file = new File(root, "/postReportCard.txt");
+    public static BufferedWriter out;
+
+    static {
+        try {
+            out = new BufferedWriter((new FileWriter(file, true)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     TextView mGrade, mFinalScore;
-    Button mRetryButton, nextBtn, saveBtn;
+    Button mRetryButton, nextBtn, saveBtn, buildBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        mGrade = (TextView)findViewById(R.id.grade);
-        mFinalScore = (TextView)findViewById(R.id.outOf);
-        mRetryButton = (Button)findViewById(R.id.retry);
-        nextBtn = (Button) findViewById(R.id.nextBtn);
-        saveBtn = (Button) findViewById(R.id.saveBtn);
+        mGrade = findViewById(R.id.grade);
+        mFinalScore = findViewById(R.id.outOf);
+        mRetryButton = findViewById(R.id.retry);
+        nextBtn = findViewById(R.id.nextBtn);
+        saveBtn =  findViewById(R.id.saveBtn);
+        buildBtn = findViewById(R.id.buildBtn);
 
+        buildBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                save(resultActivity.this, "postReportCard.txt", mScore);
-
+                try {
+                    save();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -68,17 +101,11 @@ public class resultActivity extends AppCompatActivity {
         });
         mFinalScore.setText("You scored " + mScore);
     }
-    public void save(Context context, String fileName, int score) {
-        try {
-            File root = new File(Environment.getExternalStorageDirectory(), "reports");
-            File file = new File(root, fileName);
-            FileWriter writer = new FileWriter(file);
-            writer.write("postTest number "+testNum+" result is " +score);
-            writer.flush();
-            writer.close();
-            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void save() throws IOException{
+
+        out.write("post test number "+testNum+ " score is " + mScore + "/"+(QA+1));
+        out.newLine();
+
+
     }
 }

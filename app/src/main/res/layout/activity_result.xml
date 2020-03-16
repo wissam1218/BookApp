@@ -81,4 +81,20 @@
         android:text="Save Score"
         android:textColor="#fff"
         android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/buildBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/retry"
+        android:layout_alignEnd="@+id/retry"
+        android:layout_marginTop="279dp"
+        android:layout_marginEnd="-16dp"
+        android:layout_marginBottom="4dp"
+        android:background="#4CAF50"
+        android:fontFamily="casual"
+        android:padding="8dp"
+        android:text="Build Report"
+        android:textColor="#fff"
+        android:textSize="18sp" />
 </RelativeLayout>
