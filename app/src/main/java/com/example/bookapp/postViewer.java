@@ -58,7 +58,7 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
-        loadBtn = findViewById(R.id.loadBtn);
+
         loadQuestions();
         updateQuestion(q);
         score.setText("Score: " + mScore);

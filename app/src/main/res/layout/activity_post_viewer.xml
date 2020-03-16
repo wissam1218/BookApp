@@ -19,14 +19,6 @@
         android:text="Button" />
 
     <Button
-        android:id="@+id/loadBtn"
-        android:layout_width="76dp"
-        android:layout_height="97dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="19dp"
-        android:text="Load File" />
-
-    <Button
         android:id="@+id/choice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

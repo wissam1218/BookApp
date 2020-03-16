@@ -5,8 +5,8 @@ import android.os.Environment;
 
 
 public class questions {
-    //three questions
-    final static int QA = 2;
+    //ten questions sets
+    final static int QA = 9;
     final static int OPTIONS = QA * 4;
     public static String mQuestions[] = new String[QA+1];
     public static String mAnswers[] = new String[QA+1];
