@@ -12,19 +12,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import static com.example.bookapp.postViewer.PostScore;
-import static com.example.bookapp.postViewer.questionNum;
-import static com.example.bookapp.postViewer.testNum;
+import static com.example.bookapp.preViewer.PreScore;
+import static com.example.bookapp.preViewer.questionNum;
+import static com.example.bookapp.preViewer.testNum;
 import static com.example.bookapp.questions.QA;
 
-public class resultActivity extends AppCompatActivity {
+public class resultActivityPre extends AppCompatActivity {
 
     public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
-    public static File file = new File(root, "/postReportCard.txt");
-    public static BufferedWriter out;
+    public static File prefile = new File(root, "/preReportCard.txt");
+    public static BufferedWriter preout;
     static {
         try {
-            out = new BufferedWriter((new FileWriter(file, true)));
+            preout = new BufferedWriter((new FileWriter(prefile, true)));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +48,7 @@ public class resultActivity extends AppCompatActivity {
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(resultActivity.this, MainActivity.class);
+                Intent i = new Intent(resultActivityPre.this, MainActivity.class);
                 startActivity(i);
             }
         });
@@ -57,8 +57,8 @@ public class resultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    out.close();
-                    PostScore = 0;
+                    preout.close();
+                    PreScore = 0;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -80,8 +80,8 @@ public class resultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 testNum++;
                 questionNum = 0;
-                PostScore = 0;
-                Intent intent = new Intent(resultActivity.this, postViewer.class);
+                PreScore = 0;
+                Intent intent = new Intent(resultActivityPre.this, preViewer.class);
                 startActivity(intent);
             }
         });
@@ -89,16 +89,16 @@ public class resultActivity extends AppCompatActivity {
         mRetryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostScore = 0;
+                PreScore = 0;
                 questionNum = 0;
-                Intent intent = new Intent(resultActivity.this, postViewer.class);
+                Intent intent = new Intent(resultActivityPre.this, preViewer.class);
                 startActivity(intent);
             }
         });
-        mFinalScore.setText("You scored " + PostScore);
+        mFinalScore.setText("You scored " + PreScore);
     }
     public static void save() throws IOException{
-        out.write("post test number "+testNum+ " score is " + PostScore + "/"+(QA+1));
-        out.newLine();
+        preout.write("post test number "+testNum+ " score is " + PreScore + "/"+(QA+1));
+        preout.newLine();
     }
 }

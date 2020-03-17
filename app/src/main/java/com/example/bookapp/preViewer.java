@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,11 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
-
-import static com.example.bookapp.MainActivity.hasPermissions;
-
-import static java.lang.Math.floor;
 
 public class preViewer extends AppCompatActivity  {
 
@@ -42,14 +38,9 @@ public class preViewer extends AppCompatActivity  {
     TextView score,question;
     private questions mQuestions = new questions();
     private String mAnswer;
-    private int mScore = 0;
-
-
-
-    int incorrect = 0;
-
-
-
+    public static int PreScore = 0;
+    public static int questionNum = 0;
+    public static int testNum = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,20 +52,20 @@ public class preViewer extends AppCompatActivity  {
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
         loadQuestions();
-
         updateQuestion(q);
-        score.setText("Score: " + mScore);
+        score.setText("Score: " + PreScore);
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 q++;
                 if(choice1.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(preViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PreScore++;
+                    score.setText("Score: " + PreScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
+                }else{
+                    score.setText("Score: " + PreScore);
+                    updateQuestion(q);
                 }
             }
         });
@@ -84,13 +75,13 @@ public class preViewer extends AppCompatActivity  {
                 q++;
                 if(choice2.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(preViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PreScore++;
+                    score.setText("Score: " + PreScore);
                     updateQuestion(q);
                 } else{
-                    gameOver();
+                    score.setText("Score: " + PreScore);
+                    updateQuestion(q);
                 }
-
             }
         });
         choice3.setOnClickListener(new View.OnClickListener() {
@@ -100,11 +91,12 @@ public class preViewer extends AppCompatActivity  {
                 q++;
                 if(choice3.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(preViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PreScore++;
+                    score.setText("Score: " + PreScore);
                     updateQuestion(q);
                 } else{
-                    gameOver();
+                    score.setText("Score: " + PreScore);
+                    updateQuestion(q);
                 }
             }
         });
@@ -114,39 +106,45 @@ public class preViewer extends AppCompatActivity  {
                 q++;
                 if(choice4.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(preViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PreScore++;
+                    score.setText("Score: " + PreScore);
                     updateQuestion(q);
-                } else{
-                    gameOver();
+                }  else{
+                    score.setText("Score: " + PreScore);
+                    updateQuestion(q);
                 }
             }
         });
-
     }
 
     private void updateQuestion(int n){
-        question.setText(mQuestions.getQuestions(n));
-        choice1.setText(mQuestions.getChoice1(n));
-        choice2.setText(mQuestions.getChoice2(n));
-        choice3.setText(mQuestions.getChoice3(n));
-        choice4.setText(mQuestions.getChoice4(n));
-        mAnswer = mQuestions.getAnswer(n);
+        // check if we are not outside array bounds for questions
+        if(questionNum<mQuestions.mQuestions.length){
+            question.setText(mQuestions.getQuestions(n));
+            choice1.setText(mQuestions.getChoice1(n));
+            choice2.setText(mQuestions.getChoice2(n));
+            choice3.setText(mQuestions.getChoice3(n));
+            choice4.setText(mQuestions.getChoice4(n));
+            mAnswer = mQuestions.getAnswer(n);
+            questionNum++;
+        }
+        else {
+            Intent i = new Intent(preViewer.this, resultActivity.class);
+            i.putExtra("score", PreScore); // pass the score
+            startActivity(i);
+        }
     }
 
 
 
     public void loadQuestions(){
-
         // these counters are required so that each question set is loaded into the correct position
         int qCount=0;
         int cCount = -1;
         int ansCount = 0;
-
         Integer[] cArr = {0,1,2,3};
-
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/preTest.txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 
@@ -187,20 +185,5 @@ public class preViewer extends AppCompatActivity  {
         }
         catch(IOException e) {
         }
-    }
-    private void gameOver(){
-        AlertDialog.Builder adb = new AlertDialog.Builder(preViewer.this);
-        adb.setMessage("Game Over.").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                startActivity(new Intent(getApplicationContext(), postViewer.class));
-            }
-        }).setNegativeButton("exit?", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                finish();
-            }
-        });
-        adb.show();
     }
 }

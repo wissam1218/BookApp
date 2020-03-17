@@ -43,10 +43,8 @@ public class postViewer extends AppCompatActivity  {
     TextView score,question;
     private questions mQuestions = new questions();
     private String mAnswer;
-    public static int mScore = 0;
-    Button loadBtn;
-    public static int questionNum=0;
-
+    public static int PostScore = 0;
+    public static int questionNum = 0;
     public static int testNum = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,22 +56,20 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
-
         loadQuestions();
         updateQuestion(q);
-        score.setText("Score: " + mScore);
+        score.setText("Score: " + PostScore);
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 q++;
                 if(choice1.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                   mScore++;
-                    score.setText("Score: " + mScore);
+                   PostScore++;
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }else{
-                    gameOver();
-                    score.setText("Score: " + mScore);
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }
             }
@@ -84,12 +80,11 @@ public class postViewer extends AppCompatActivity  {
                 q++;
                 if(choice2.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PostScore++;
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 } else{
-                    gameOver();
-                    score.setText("Score: " + mScore);
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }
             }
@@ -101,12 +96,11 @@ public class postViewer extends AppCompatActivity  {
                 q++;
                 if(choice3.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PostScore++;
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 } else{
-                    gameOver();
-                    score.setText("Score: " + mScore);
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }
             }
@@ -117,12 +111,11 @@ public class postViewer extends AppCompatActivity  {
                 q++;
                 if(choice4.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                    mScore++;
-                    score.setText("Score: " + mScore);
+                    PostScore++;
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }  else{
-                    gameOver();
-                    score.setText("Score: " + mScore);
+                    score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }
             }
@@ -142,15 +135,8 @@ public class postViewer extends AppCompatActivity  {
         }
         else {
             Intent i = new Intent(postViewer.this, resultActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putInt("Final Score: ", mScore);
-            i.putExtras(bundle);
-            postViewer.this.finish();
+            i.putExtra("score", PostScore); // pass the score
             startActivity(i);
-
-//            Intent intent = new Intent(postViewer.this, resultActivity.class);
-//            intent.putExtra("score", mScore); // pass the score
-//            startActivity(intent);
         }
     }
 
@@ -205,24 +191,4 @@ public class postViewer extends AppCompatActivity  {
         catch(IOException e) {
         }
     }
-    private void gameOver(){
-        int incorrect = 0;
-        if(incorrect > 2){
-            AlertDialog.Builder adb = new AlertDialog.Builder(postViewer.this);
-            adb.setMessage("Game Over.").setPositiveButton("new game?", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(getApplicationContext(), postViewer.class));
-                }
-            }).setNegativeButton("exit?", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
-            adb.show();
-        } else return;
-        }
-
-
 }

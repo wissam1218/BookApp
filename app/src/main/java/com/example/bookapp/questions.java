@@ -1,8 +1,5 @@
 package com.example.bookapp;
 
-import android.os.Environment;
-
-
 
 public class questions {
     //ten questions sets
