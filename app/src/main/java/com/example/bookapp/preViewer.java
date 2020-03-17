@@ -129,13 +129,11 @@ public class preViewer extends AppCompatActivity  {
             questionNum++;
         }
         else {
-            Intent i = new Intent(preViewer.this, resultActivity.class);
+            Intent i = new Intent(preViewer.this, resultActivityPre.class);
             i.putExtra("score", PreScore); // pass the score
             startActivity(i);
         }
     }
-
-
 
     public void loadQuestions(){
         // these counters are required so that each question set is loaded into the correct position
@@ -144,7 +142,7 @@ public class preViewer extends AppCompatActivity  {
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest"+testNum+".txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/preTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 

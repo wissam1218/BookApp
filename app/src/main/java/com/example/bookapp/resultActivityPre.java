@@ -20,17 +20,17 @@ import static com.example.bookapp.questions.QA;
 public class resultActivityPre extends AppCompatActivity {
 
     public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
-    public static File prefile = new File(root, "/preReportCard.txt");
-    public static BufferedWriter preout;
-    static {
+    public static File file = new File(root, "/preReportCard.txt");
+    public static BufferedWriter out;
+    {
         try {
-            preout = new BufferedWriter((new FileWriter(prefile, true)));
+            out = new BufferedWriter((new FileWriter(file, true)));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     TextView mGrade, mFinalScore;
-    Button mRetryButton, nextBtn, saveBtn, buildBtn, menuBtn;
+    Button mRetryButton, nextBtn, saveBtn, menuBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class resultActivityPre extends AppCompatActivity {
         mRetryButton = findViewById(R.id.retry);
         nextBtn = findViewById(R.id.nextBtn);
         saveBtn =  findViewById(R.id.saveBtn);
-        buildBtn = findViewById(R.id.buildBtn);
         menuBtn = findViewById(R.id.menuBtn);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,22 +52,12 @@ public class resultActivityPre extends AppCompatActivity {
             }
         });
 
-        buildBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    preout.close();
-                    PreScore = 0;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    save();
+                    savethis();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -97,8 +86,10 @@ public class resultActivityPre extends AppCompatActivity {
         });
         mFinalScore.setText("You scored " + PreScore);
     }
-    public static void save() throws IOException{
-        preout.write("post test number "+testNum+ " score is " + PreScore + "/"+(QA+1));
-        preout.newLine();
+    public static void savethis() throws IOException{
+        out.write("Pre test number "+testNum+ " score is " + PreScore + "/"+(QA+1));
+        out.newLine();
+        PreScore = 0;
+        out.close();
     }
 }

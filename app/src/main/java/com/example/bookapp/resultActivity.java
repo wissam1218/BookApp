@@ -19,10 +19,10 @@ import static com.example.bookapp.questions.QA;
 
 public class resultActivity extends AppCompatActivity {
 
-    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
-    public static File file = new File(root, "/postReportCard.txt");
-    public static BufferedWriter out;
-    static {
+    public  File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+    public  File file = new File(root, "/postReportCard.txt");
+    public  BufferedWriter out;
+     {
         try {
             out = new BufferedWriter((new FileWriter(file, true)));
         } catch (IOException e) {
@@ -30,7 +30,7 @@ public class resultActivity extends AppCompatActivity {
         }
     }
     TextView mGrade, mFinalScore;
-    Button mRetryButton, nextBtn, saveBtn, buildBtn, menuBtn;
+    Button mRetryButton, nextBtn, saveBtn, menuBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class resultActivity extends AppCompatActivity {
         mRetryButton = findViewById(R.id.retry);
         nextBtn = findViewById(R.id.nextBtn);
         saveBtn =  findViewById(R.id.saveBtn);
-        buildBtn = findViewById(R.id.buildBtn);
+
         menuBtn = findViewById(R.id.menuBtn);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
@@ -53,17 +53,7 @@ public class resultActivity extends AppCompatActivity {
             }
         });
 
-        buildBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    out.close();
-                    PostScore = 0;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,8 +87,9 @@ public class resultActivity extends AppCompatActivity {
         });
         mFinalScore.setText("You scored " + PostScore);
     }
-    public static void save() throws IOException{
+    public void save() throws IOException{
         out.write("post test number "+testNum+ " score is " + PostScore + "/"+(QA+1));
         out.newLine();
+        out.close();
     }
 }
