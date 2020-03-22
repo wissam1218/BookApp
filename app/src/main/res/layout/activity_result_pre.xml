@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/cardview_dark_background"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".resultActivity">
@@ -12,7 +13,7 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:padding="16dp"
-        android:textColor="#000"
+        android:textColor="#f7f7f5"
         android:fontFamily="sans-serif-condensed"
         android:layout_margin="16dp"
         android:id="@+id/grade"
@@ -29,30 +30,27 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-condensed"
         android:padding="16dp"
-        android:text="Final Score"
+        android:text="Final Score:"
         android:textAlignment="center"
-        android:textColor="#000"
+        android:textColor="#f7f7f5"
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/retry"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/score"
         android:layout_centerHorizontal="true"
         android:layout_margin="4dp"
         android:layout_marginTop="64dp"
         android:layout_marginBottom="4dp"
-        android:background="#4CAF50"
-        android:fontFamily="sans-serif-condensed"
         android:padding="8dp"
         android:text="Retry Quiz"
-        android:textColor="#fff"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/retry"
         android:layout_alignEnd="@+id/retry"
@@ -60,42 +58,33 @@
         android:layout_marginTop="45dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="4dp"
-        android:background="#4CAF50"
-        android:fontFamily="sans-serif-condensed"
         android:padding="8dp"
         android:text="Next Quiz"
-        android:textColor="#fff"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/saveBtn"
-        android:layout_width="110dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/retry"
         android:layout_alignEnd="@+id/retry"
         android:layout_marginTop="162dp"
-        android:layout_marginEnd="-1dp"
+        android:layout_marginEnd="5dp"
         android:layout_marginBottom="4dp"
-        android:background="#4CAF50"
-        android:fontFamily="sans-serif-condensed"
         android:padding="8dp"
         android:text="Save Score"
-        android:textColor="#fff"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/menuBtn"
-        android:layout_width="122dp"
+        android:layout_width="match_parent"
         android:layout_height="58dp"
         android:layout_below="@+id/retry"
         android:layout_alignEnd="@+id/retry"
         android:layout_marginTop="399dp"
         android:layout_marginEnd="-9dp"
         android:layout_marginBottom="4dp"
-        android:background="#4CAF50"
-        android:fontFamily="sans-serif-condensed"
         android:padding="8dp"
         android:text="Menu"
-        android:textColor="#fff"
         android:textSize="18sp" />
 </RelativeLayout>

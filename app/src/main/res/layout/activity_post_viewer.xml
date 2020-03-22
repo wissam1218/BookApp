@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_dark_background"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -48,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:textColor="#f7f7f5"
         android:text="TextView" />
 
     <TextView
@@ -55,6 +57,7 @@
         android:layout_width="381dp"
         android:layout_height="325dp"
         android:layout_alignParentTop="true"
+        android:textColor="#f7f7f5"
         android:layout_marginTop="28dp"
         android:text="TextView" />
 

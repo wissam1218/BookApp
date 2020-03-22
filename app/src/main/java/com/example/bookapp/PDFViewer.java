@@ -32,6 +32,7 @@ public class PDFViewer extends AppCompatActivity {
         setContentView(R.layout.activity_pdfviewer);
         loadPDF();
     }
+    // function to load specified pdf
     private void loadPDF(){
         File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/math.pdf");
         PDFView pdf = findViewById(R.id.pdfView);
