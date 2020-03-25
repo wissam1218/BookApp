@@ -1,40 +1,49 @@
 package com.example.bookapp;
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
-
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.util.FitPolicy;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import com.nbsp.materialfilepicker.MaterialFilePicker;
+import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.os.Environment;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-
 import java.io.File;
-import java.io.FileInputStream;
+import java.util.regex.Pattern;
 
 public class PDFViewer extends AppCompatActivity {
+    public static String filepath = "";
+    TextView tvView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfviewer);
+        tvView = findViewById(R.id.textView3);
+        new MaterialFilePicker()
+                .withActivity(this)
+                .withRequestCode(1)
+                .withFilter(Pattern.compile(".*\\.pdf$")) // Filtering files and directories by file name using regexp
+                .withFilterDirectories(true) // Set directories filterable (false by default)
+                .withHiddenFiles(true) // Show hidden files and folders
+                .start();
         loadPDF();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+           filepath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
+            tvView.setText(filepath); // this path is shown to be correct
+        }
     }
     // function to load specified pdf
     private void loadPDF(){
-        File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/math.pdf");
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/math.pdf");
         PDFView pdf = findViewById(R.id.pdfView);
         pdf.fromFile(file).enableSwipe(true)
                 .swipeHorizontal(false)
@@ -51,10 +60,5 @@ public class PDFViewer extends AppCompatActivity {
                 .nightMode(true)
                 .load();
     }
-
-
-
-
-
 
 }
