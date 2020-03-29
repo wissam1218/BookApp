@@ -16,15 +16,20 @@ import java.util.Collections;
 import java.util.List;
 
 public class preViewer extends AppCompatActivity  {
-
-    // q is a counter used to keep track of questions
+    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+    public static File file = new File(root, "/preReportCard.txt");
+    // q is used to update the questions
     int q = 0;
     Button choice1,choice2,choice3,choice4;
     TextView score,question;
+    // we refer to the questions class and create a string variable to hold the correct answer
     private questions mQuestions = new questions();
     private String mAnswer;
+    // must keep track of score
     public static int PreScore = 0;
+    // must keep track of question num to update the questions in the correct order
     public static int questionNum = 0;
+    // must keep track of test num to help in the report card file
     public static int testNum = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,21 @@ public class preViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
+        // if reports folder is not found on root of storage the we create that folder
+        if(!root.exists()){
+            root.mkdir();
+        }
+        // if the file to store the scores does not exist then we create that file
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // we need to load the questions from the files found on storage
         loadQuestions();
+        // we need to update questions so they appear on the screen
         updateQuestion(q);
         score.setText("Score: " + PreScore);
         choice1.setOnClickListener(new View.OnClickListener() {

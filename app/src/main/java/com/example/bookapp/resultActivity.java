@@ -1,27 +1,23 @@
 package com.example.bookapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import static com.example.bookapp.postViewer.PostScore;
+import static com.example.bookapp.postViewer.file;
 import static com.example.bookapp.postViewer.questionNum;
 import static com.example.bookapp.postViewer.testNum;
 import static com.example.bookapp.questions.QA;
 
 public class resultActivity extends AppCompatActivity {
 
-    public  File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
-    public  File file = new File(root, "/postReportCard.txt");
-    public  BufferedWriter out;
+    public BufferedWriter out;
      {
         try {
             out = new BufferedWriter((new FileWriter(file, true)));
@@ -36,15 +32,12 @@ public class resultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-
         mGrade = findViewById(R.id.grade);
         mFinalScore = findViewById(R.id.score);
         mRetryButton = findViewById(R.id.retry);
         nextBtn = findViewById(R.id.nextBtn);
         saveBtn =  findViewById(R.id.saveBtn);
-
         menuBtn = findViewById(R.id.menuBtn);
-
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,8 +45,6 @@ public class resultActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
