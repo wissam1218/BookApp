@@ -19,22 +19,28 @@ import java.util.List;
 // postviewer, previewer and their result activities are the same
 
 public class postViewer extends AppCompatActivity  {
-    // first when post viewer opens, we create refrences to the files that we stores the scores in
+    // first when post viewer opens, we create references to the files that we stores the scores in
     public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
     public static File file = new File(root, "/postReportCard.txt");
+
     // q is used to update the questions
     int q = 0;
     Button choice1,choice2,choice3,choice4;
     TextView score,question;
+
     // we refer to the questions class and create a string variable to hold the correct answer
     private questions mQuestions = new questions();
     private String mAnswer;
+
     // must keep track of score
     public static int PostScore = 0;
+
     // must keep track of question num to update the questions in the correct order
     public static int questionNum = 0;
+
     // must keep track of test num to help in the report card file
     public static int testNum = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +65,13 @@ public class postViewer extends AppCompatActivity  {
         }
         // we need to load the questions from the files found on storage
         loadQuestions();
+
         // we need to update questions so they appear on the screen
         updateQuestion(q);
+
+        // set score to screen
         score.setText("Score: " + PostScore);
+
         choice1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,6 +135,7 @@ public class postViewer extends AppCompatActivity  {
         });
     }
 
+    // this function extracts the question set from the appropriate arrays and sets the text
     private void updateQuestion(int n){
         // check if we are not outside array bounds for questions
         if(questionNum<mQuestions.mQuestions.length){
@@ -138,12 +149,10 @@ public class postViewer extends AppCompatActivity  {
         }
         else {
             Intent i = new Intent(postViewer.this, resultActivity.class);
-            i.putExtra("score", PostScore); // pass the score
+            i.putExtra("score", PostScore); // pass the score to resultActivity
             startActivity(i);
         }
     }
-
-
 
     public void loadQuestions(){
         // these counters are required so that each question set is loaded into the correct position
@@ -182,7 +191,7 @@ public class postViewer extends AppCompatActivity  {
                 else if (line.startsWith(".")) {
                     questions.mAnswers[ansCount] = line;
                     ansCount++;
-                    // shuffle choice array
+                    // shuffle choice array to randomize choices
                     List<Integer> intList = Arrays.asList(cArr);
                     Collections.shuffle(intList);
                     intList.toArray(cArr);
