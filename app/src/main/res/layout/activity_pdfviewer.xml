@@ -25,18 +25,6 @@
     <include
         layout="@layout/content_pdfviewer"
         android:layout_width="match_parent"
-        android:layout_height="354dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:text="TextView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="68dp"
-        android:text="TextView" />
+        android:layout_height="672dp" />
 
 </LinearLayout>
