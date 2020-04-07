@@ -19,6 +19,10 @@ import java.util.List;
 // postviewer, previewer and their result activities are the same
 
 public class postViewer extends AppCompatActivity  {
+    // default class is class1
+    public static int classNum = 1;
+    // user should choose lesson eventually
+     public static int lesson = 1;
     // first when post viewer opens, we create references to the files that we stores the scores in
     public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
     public static File file = new File(root, "/postReportCard.txt");
@@ -161,7 +165,8 @@ public class postViewer extends AppCompatActivity  {
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest"+testNum+".txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
+                    +"/Classrooms/class1/Curriculum/Lesson"+lesson+"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 
