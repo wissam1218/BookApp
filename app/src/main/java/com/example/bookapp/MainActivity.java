@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     private Button PDFbutton;
     private Button postTest;
     private Button preTest;
+    private EditText lessonNum;
+
+    // user should choose lesson eventually
+    public static int lesson = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +35,17 @@ public class MainActivity extends AppCompatActivity {
             // ask permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 111);
         }
+        lessonNum = findViewById(R.id.lessonNum);
+
         PDFbutton = findViewById(R.id.PDFButton);
         postTest = findViewById(R.id.PostButton);
         preTest = findViewById(R.id.preButton);
+        lessonNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lesson = Integer.parseInt(lessonNum.getText().toString());
+            }
+        });
         preTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 openPDF();
             }
         });
+
     }
     private void openPDF(){
         Intent i = new Intent(MainActivity.this,PDFViewer.class);

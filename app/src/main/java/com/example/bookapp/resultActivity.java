@@ -9,9 +9,10 @@ import android.widget.TextView;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import static com.example.bookapp.MainActivity.lesson;
 import static com.example.bookapp.postViewer.PostScore;
 import static com.example.bookapp.postViewer.file;
-import static com.example.bookapp.postViewer.lesson;
 import static com.example.bookapp.postViewer.questionNum;
 import static com.example.bookapp.postViewer.testNum;
 import static com.example.bookapp.questions.QA;

@@ -2,79 +2,85 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/cardview_dark_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/PDFButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:text="Math Book"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/PostButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/preButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:text="Pre-test"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/PDFButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PDFButton"
-        app:layout_constraintVertical_bias="0.436" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/PostButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
         android:text="Post-test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PDFButton"
-        app:layout_constraintVertical_bias="0.64" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="405dp"
-        android:layout_height="59dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="First, take the postTest and save the score"
-        android:textColor="#f7f7f5"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="410dp"
+        android:layout_height="73dp"
+        android:text="First, take the postTest and save the score Second, read the appropriate section in the book Third, take the postTest and save the score"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/preButton"
+        app:layout_constraintStart_toStartOf="@+id/preButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/lesson"
+        android:layout_width="112dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="32dp"
+        android:text="Choose Lesson: "
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="405dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="4dp"
+        android:id="@+id/lessonNum"
+        android:layout_width="52dp"
+        android:layout_height="47dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Second, read the appropriate section in the book"
-        android:textColor="#f7f7f5"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/preButton"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="405dp"
-        android:layout_height="59dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Third, take the postTest and save the score"
-        android:textColor="#f7f7f5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
