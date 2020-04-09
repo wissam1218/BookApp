@@ -16,14 +16,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.bookapp.MainActivity.classNumber;
 import static com.example.bookapp.MainActivity.lesson;
 
 // postviewer, previewer and their result activities are the same
 
 public class postViewer extends AppCompatActivity  {
-
-    // default class is class1
-    public static int classNum = 1;
 
     // first when post viewer opens, we create references to the files that we stores the scores in
     public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
@@ -168,10 +166,9 @@ public class postViewer extends AppCompatActivity  {
         Integer[] cArr = {0,1,2,3};
         try{
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                    +"/Classrooms/class1/Curriculum/Lesson "+lesson+"/postTest"+testNum+".txt");
+                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lesson+"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
-
             while((line = lin.readLine()) != null) {
                 // load question
                 if (line.startsWith("$")) {

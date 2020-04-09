@@ -7,6 +7,19 @@
     android:background="#00FFFFFF"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/classNum"
+        android:layout_width="52dp"
+        android:layout_height="47dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/preButton"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.252" />
+
     <Button
         android:id="@+id/PDFButton"
         android:layout_width="match_parent"
@@ -69,6 +82,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4" />
+
+    <TextView
+        android:id="@+id/lesson2"
+        android:layout_width="112dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="32dp"
+        android:text="Choose Class: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266" />
 
     <EditText
         android:id="@+id/lessonNum"

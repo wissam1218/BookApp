@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private Button postTest;
     private Button preTest;
     private EditText lessonNum;
+    private EditText classNum;
 
+    // default class is class1
+    public static int classNumber = 1;
     // user should choose lesson eventually
     public static int lesson = 1;
     @Override
@@ -36,10 +39,17 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 111);
         }
         lessonNum = findViewById(R.id.lessonNum);
+        classNum = findViewById(R.id.classNum);
 
         PDFbutton = findViewById(R.id.PDFButton);
         postTest = findViewById(R.id.PostButton);
         preTest = findViewById(R.id.preButton);
+        classNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                classNumber = Integer.parseInt(classNum.getText().toString());
+            }
+        });
         lessonNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

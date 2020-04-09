@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import static com.example.bookapp.MainActivity.classNumber;
 import static com.example.bookapp.MainActivity.lesson;
 import static com.example.bookapp.postViewer.PostScore;
 import static com.example.bookapp.postViewer.file;
@@ -81,7 +81,7 @@ public class resultActivity extends AppCompatActivity {
         mFinalScore.setText("You scored " + PostScore);
     }
     public void save() throws IOException{
-        out.write("Lesson: " + lesson + "" +
+        out.write("Class: " + classNumber + ", " + "Lesson: " + lesson + "" +
                 "\tpost test number "+testNum+ " score is " + PostScore + "/"+(QA+1));
         out.newLine();
         out.close();
