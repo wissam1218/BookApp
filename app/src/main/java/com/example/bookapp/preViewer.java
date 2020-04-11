@@ -15,8 +15,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lesson;
+
 public class preViewer extends AppCompatActivity  {
-    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+    public static File root = new File(Environment.getExternalStorageDirectory() + "/reports");
     public static File file = new File(root, "/preReportCard.txt");
     // q is used to update the questions
     int q = 0;
@@ -146,7 +149,8 @@ public class preViewer extends AppCompatActivity  {
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/preTest"+testNum+".txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
+                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lesson+"/preTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 

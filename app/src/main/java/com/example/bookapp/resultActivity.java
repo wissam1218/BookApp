@@ -81,8 +81,8 @@ public class resultActivity extends AppCompatActivity {
         mFinalScore.setText("You scored " + PostScore);
     }
     public void save() throws IOException{
-        out.write("Class: " + classNumber + ", " + "Lesson: " + lesson + "" +
-                "\tpost test number "+testNum+ " score is " + PostScore + "/"+(QA+1));
+        out.write("Class: " + classNumber + ", " + "Lesson: " + lesson + ", " +
+                "post test number "+ testNum + " score is: " + PostScore + "/"+(QA+1));
         out.newLine();
         out.close();
     }

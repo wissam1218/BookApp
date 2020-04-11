@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -16,32 +15,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginTop="290dp"
         android:layout_marginBottom="285dp"
-        android:text="Button" />
+        android:text="Choice" />
 
     <Button
         android:id="@+id/choice2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="237dp"
-        android:text="Button" />
+        android:layout_marginBottom="210dp"
+        android:text="Choice" />
 
     <Button
         android:id="@+id/choice3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="192dp"
-        android:text="Button" />
+        android:layout_marginBottom="130dp"
+        android:text="Choice" />
 
     <Button
         android:id="@+id/choice4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="150dp"
-        android:text="Button" />
+        android:layout_marginBottom="50dp"
+        android:minWidth="90dip"
+        android:minHeight="50dip"
+        android:text="Choice" />
 
     <TextView
         android:id="@+id/score"
@@ -49,17 +51,19 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#f7f7f5"
-        android:text="TextView" />
+        android:text="Score: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#000000" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="381dp"
         android:layout_height="325dp"
         android:layout_alignParentTop="true"
-        android:textColor="#f7f7f5"
         android:layout_marginTop="28dp"
-        android:text="TextView" />
+        android:text="Question: "
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#000000" />
 
 </RelativeLayout>
 

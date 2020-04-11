@@ -60,17 +60,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="410dp"
-        android:layout_height="73dp"
-        android:text="First, take the postTest and save the score Second, read the appropriate section in the book Third, take the postTest and save the score"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/preButton"
-        app:layout_constraintStart_toStartOf="@+id/preButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.054" />
-
-    <TextView
         android:id="@+id/lesson"
         android:layout_width="112dp"
         android:layout_height="34dp"
