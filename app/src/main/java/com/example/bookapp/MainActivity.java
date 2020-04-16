@@ -5,40 +5,44 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
-
     private Button PDFbutton;
     private Button postTest;
     private Button preTest;
     private EditText lessonNum;
     private EditText classNum;
 
-    // default class is class1
-    public static int classNumber = 1;
-    // user should choose lesson eventually
-    public static int lesson = 1;
+    // Variables for the class and lesson number
+
+    public static int classNumber;
+    public static int lesson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // check permission when application is first loaded
+
+        // Check permission when application is first loaded
         if (!hasPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})) {
-            // ask permission
+            // Ask permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 111);
         }
+
         lessonNum = findViewById(R.id.lessonNum);
         classNum = findViewById(R.id.classNum);
         PDFbutton = findViewById(R.id.PDFButton);
         postTest = findViewById(R.id.PostButton);
         preTest = findViewById(R.id.preButton);
+
 
         classNum.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void openPDF(){
         Intent i = new Intent(MainActivity.this,PDFViewer.class);
         startActivity(i);
