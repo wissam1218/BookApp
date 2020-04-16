@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 import static com.example.bookapp.MainActivity.classNumber;
-import static com.example.bookapp.MainActivity.lesson;
+import static com.example.bookapp.MainActivity.lessonNumber;
 
 public class PDFViewer extends AppCompatActivity {
     // User must ensure that both class number and lesson number are entered in the main menu correctly
@@ -21,7 +21,7 @@ public class PDFViewer extends AppCompatActivity {
         // The correct PDF file is found in the Classrooms folder
 
         String filepath = Environment.getExternalStorageDirectory().getAbsoluteFile()
-                +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lesson+"/pdf_for_lesson.pdf";
+                +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lessonNumber+"/pdf_for_lesson.pdf";
         File file = new File(filepath);
         PDFView pdf = findViewById(R.id.pdfView);
 

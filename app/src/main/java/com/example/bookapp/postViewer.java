@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.example.bookapp.MainActivity.classNumber;
-import static com.example.bookapp.MainActivity.lesson;
+import static com.example.bookapp.MainActivity.lessonNumber;
 
 // postviewer, previewer and their result activities are the same
 
@@ -173,7 +173,7 @@ public class postViewer extends AppCompatActivity  {
         Integer[] cArr = {0,1,2,3};
         try{
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lesson+"/postTest"+testNum+".txt");
+                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lessonNumber +"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
             while((line = lin.readLine()) != null) {

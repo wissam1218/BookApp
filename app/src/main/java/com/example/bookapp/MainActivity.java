@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     // Variables for the class and lesson number
 
     public static int classNumber;
-    public static int lesson;
+    public static int lessonNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
         if (!hasPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE})) {
             // Ask permission
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 111);
+        }
+
+        //
+
+        if(savedInstanceState != null){
+            int savedClassNum = savedInstanceState.getInt("classnum",classNumber);
+            classNum.setText(savedClassNum);
+            int savedLessonNum = savedInstanceState.getInt("lessonnum",lessonNumber);
+            lessonNum.setText(savedLessonNum);
         }
 
         lessonNum = findViewById(R.id.lessonNum);
@@ -54,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         lessonNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                lesson = Integer.parseInt(lessonNum.getText().toString());
+                lessonNumber = Integer.parseInt(lessonNum.getText().toString());
             }
         });
 
@@ -105,5 +114,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putInt("classnum", classNumber);
+        savedInstanceState.putInt("lessonnum", lessonNumber);
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

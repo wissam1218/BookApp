@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.example.bookapp.MainActivity.classNumber;
-import static com.example.bookapp.MainActivity.lesson;
+import static com.example.bookapp.MainActivity.lessonNumber;
 
 public class preViewer extends AppCompatActivity  {
     public static File root = new File(Environment.getExternalStorageDirectory() + "/reports");
@@ -150,7 +150,7 @@ public class preViewer extends AppCompatActivity  {
         Integer[] cArr = {0,1,2,3};
         try{
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lesson+"/preTest"+testNum+".txt");
+                    +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lessonNumber +"/preTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 
