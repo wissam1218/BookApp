@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="290dp"
-        android:layout_marginBottom="285dp"
+        android:layout_marginBottom="230dp"
         android:text="Choice" />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="210dp"
+        android:layout_marginBottom="180dp"
         android:text="Choice" />
 
     <Button
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="80dp"
         android:minWidth="90dip"
         android:minHeight="50dip"
         android:text="Choice" />

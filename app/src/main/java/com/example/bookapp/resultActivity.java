@@ -19,6 +19,7 @@ import static com.example.bookapp.questions.QA;
 
 public class resultActivity extends AppCompatActivity {
 
+    // BufferedWriter is used to save the scores
     public BufferedWriter out;
      {
         try {

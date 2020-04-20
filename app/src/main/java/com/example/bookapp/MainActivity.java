@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Variables to save class and lesson
     // these are needed so the user does not have
-    // re-enter numbers betweeen activity cycles
-    public static String savedClass = "" ;
+    // re-enter numbers between activity cycles
+    public static String savedClass = "";
     public static String savedLesson = "" ;
 
     @Override
