@@ -184,7 +184,7 @@ public class postViewer extends AppCompatActivity  {
                     if(line.endsWith(">")){
                         cCount++;
                     }
-                    questions.mQuestions[qCount] = line.substring(1);
+                    questions.mQuestions[qCount] = line.substring(1, line.length()-1);
                     qCount++;
                 }
                 // Load choices
