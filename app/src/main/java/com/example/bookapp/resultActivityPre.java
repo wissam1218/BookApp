@@ -1,5 +1,4 @@
 package com.example.bookapp;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +8,8 @@ import android.widget.TextView;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lessonNumber;
 import static com.example.bookapp.preViewer.PreScore;
 import static com.example.bookapp.preViewer.file;
 import static com.example.bookapp.preViewer.questionNum;
@@ -17,6 +18,7 @@ import static com.example.bookapp.questions.QA;
 
 public class resultActivityPre extends AppCompatActivity {
 
+    // BufferedWriter is used to save the scores
     public static BufferedWriter out;
     {
         try {
@@ -78,7 +80,8 @@ public class resultActivityPre extends AppCompatActivity {
         mFinalScore.setText("You scored " + PreScore);
     }
     public static void savethis() throws IOException{
-        out.write("Pre test number "+testNum+ " score is " + PreScore + "/"+(QA+1));
+        out.write("Class: " + classNumber + ", " + "Lesson: " + lessonNumber + ", " +
+                "Pre test number "+ testNum + " score is: " + PreScore + "/"+(QA+1));
         out.newLine();
         PreScore = 0;
         out.close();

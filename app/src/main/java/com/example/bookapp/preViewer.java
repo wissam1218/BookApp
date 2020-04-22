@@ -15,8 +15,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lessonNumber;
+import static com.example.bookapp.MainActivity.savedClass;
+import static com.example.bookapp.MainActivity.savedLesson;
+
 public class preViewer extends AppCompatActivity  {
-    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+    public static File root = new File(Environment.getExternalStorageDirectory() + "/reports");
     public static File file = new File(root, "/preReportCard.txt");
     // q is used to update the questions
     int q = 0;
@@ -146,7 +151,8 @@ public class preViewer extends AppCompatActivity  {
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/preTest"+testNum+".txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
+                    +"/Classrooms/class"+ savedClass + "/Curriculum/Lesson "+ savedLesson +"/preTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
 
@@ -156,7 +162,7 @@ public class preViewer extends AppCompatActivity  {
                     if(line.endsWith(">")){
                         cCount++;
                     }
-                    questions.mQuestions[qCount] = line.substring(1);
+                    questions.mQuestions[qCount] = line.substring(1,line.length()-1);
                     qCount++;
                 }
                 // load choices

@@ -16,29 +16,38 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lessonNumber;
+import static com.example.bookapp.MainActivity.savedClass;
+import static com.example.bookapp.MainActivity.savedLesson;
+
 // postviewer, previewer and their result activities are the same
 
 public class postViewer extends AppCompatActivity  {
-    // first when post viewer opens, we create references to the files that we stores the scores in
-    public static File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "reports");
+
+    // When postViewer is initially loaded up,
+    // we create references to the files that we stores the scores in
+    public static File root = new File(Environment.getExternalStorageDirectory() + "/reports");
     public static File file = new File(root, "/postReportCard.txt");
 
     // q is used to update the questions
     int q = 0;
+
     Button choice1,choice2,choice3,choice4;
     TextView score,question;
 
-    // we refer to the questions class and create a string variable to hold the correct answer
+    // We refer to the questions class and create a string variable to hold the correct answer
     private questions mQuestions = new questions();
     private String mAnswer;
 
-    // must keep track of score
+    // We must keep track of post score
     public static int PostScore = 0;
 
-    // must keep track of question num to update the questions in the correct order
+    // We must keep track of question number so that
+    // the questions are updated in the correct order
     public static int questionNum = 0;
 
-    // must keep track of test num to help in the report card file
+    // We must keep track of the test number to help when writing to the report card file
     public static int testNum = 1;
 
     @Override
@@ -51,10 +60,12 @@ public class postViewer extends AppCompatActivity  {
         choice4 = findViewById(R.id.choice4);
         score = findViewById(R.id.score);
         question = findViewById(R.id.question);
+
         // if reports folder is not found on root of storage the we create that folder
         if(!root.exists()){
             root.mkdir();
         }
+
         // if the file to store the scores does not exist then we create that file
         if(!file.exists()){
             try {
@@ -63,6 +74,7 @@ public class postViewer extends AppCompatActivity  {
                 e.printStackTrace();
             }
         }
+
         // we need to load the questions from the files found on storage
         loadQuestions();
 
@@ -78,7 +90,7 @@ public class postViewer extends AppCompatActivity  {
                 q++;
                 if(choice1.getText().toString().equalsIgnoreCase(mAnswer.substring(1))){
                     Toast.makeText(postViewer.this,"correct",Toast.LENGTH_SHORT).show();
-                   PostScore++;
+                    PostScore++;
                     score.setText("Score: " + PostScore);
                     updateQuestion(q);
                 }else{
@@ -102,6 +114,7 @@ public class postViewer extends AppCompatActivity  {
                 }
             }
         });
+
         choice3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +148,7 @@ public class postViewer extends AppCompatActivity  {
         });
     }
 
-    // this function extracts the question set from the appropriate arrays and sets the text
+    // This function extracts the question set from the appropriate arrays and sets the text
     private void updateQuestion(int n){
         // check if we are not outside array bounds for questions
         if(questionNum<mQuestions.mQuestions.length){
@@ -155,26 +168,26 @@ public class postViewer extends AppCompatActivity  {
     }
 
     public void loadQuestions(){
-        // these counters are required so that each question set is loaded into the correct position
+        // These counters are required so that each question set is loaded into the correct position
         int qCount=0;
         int cCount = -1;
         int ansCount = 0;
         Integer[] cArr = {0,1,2,3};
         try{
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()+"/postTest"+testNum+".txt");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
+                    +"/Classrooms/class"+ savedClass + "/Curriculum/Lesson "+ savedLesson +"/postTest"+testNum+".txt");
             LineNumberReader lin = new LineNumberReader(new FileReader(file));
             String line;
-
             while((line = lin.readLine()) != null) {
-                // load question
+                // Load question
                 if (line.startsWith("$")) {
                     if(line.endsWith(">")){
                         cCount++;
                     }
-                    questions.mQuestions[qCount] = line.substring(1);
+                    questions.mQuestions[qCount] = line.substring(1, line.length()-1);
                     qCount++;
                 }
-                // load choices
+                // Load choices
                 else if (line.startsWith("&")){
                     questions.mChoices[cCount][cArr[0]]=line.substring(1);
                 }
@@ -187,11 +200,11 @@ public class postViewer extends AppCompatActivity  {
                 else if (line.startsWith("@")){
                     questions.mChoices[cCount][cArr[3]]=line.substring(1);
                 }
-                // load answers
+                // Load answers
                 else if (line.startsWith(".")) {
                     questions.mAnswers[ansCount] = line;
                     ansCount++;
-                    // shuffle choice array to randomize choices
+                    // Shuffle choice array to randomize choices
                     List<Integer> intList = Arrays.asList(cArr);
                     Collections.shuffle(intList);
                     intList.toArray(cArr);

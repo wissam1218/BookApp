@@ -29,7 +29,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    compile 'com.nbsp:library:1.8'
+    implementation 'com.nbsp:library:1.8'
     //library for  pdf viewer
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
 }

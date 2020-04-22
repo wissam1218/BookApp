@@ -9,6 +9,8 @@ import android.widget.TextView;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lessonNumber;
 import static com.example.bookapp.postViewer.PostScore;
 import static com.example.bookapp.postViewer.file;
 import static com.example.bookapp.postViewer.questionNum;
@@ -17,6 +19,7 @@ import static com.example.bookapp.questions.QA;
 
 public class resultActivity extends AppCompatActivity {
 
+    // BufferedWriter is used to save the scores
     public BufferedWriter out;
      {
         try {
@@ -79,7 +82,8 @@ public class resultActivity extends AppCompatActivity {
         mFinalScore.setText("You scored " + PostScore);
     }
     public void save() throws IOException{
-        out.write("post test number "+testNum+ " score is " + PostScore + "/"+(QA+1));
+        out.write("Class: " + classNumber + ", " + "Lesson: " + lessonNumber + ", " +
+                "post test number "+ testNum + " score is: " + PostScore + "/"+(QA+1));
         out.newLine();
         out.close();
     }

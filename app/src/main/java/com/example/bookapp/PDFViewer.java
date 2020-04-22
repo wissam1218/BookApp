@@ -1,51 +1,39 @@
 package com.example.bookapp;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import com.github.barteksc.pdfviewer.PDFView;
-import com.github.barteksc.pdfviewer.util.FitPolicy;
-import com.nbsp.materialfilepicker.MaterialFilePicker;
-import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
-import java.util.regex.Pattern;
+
+import static com.example.bookapp.MainActivity.classNumber;
+import static com.example.bookapp.MainActivity.lessonNumber;
 
 public class PDFViewer extends AppCompatActivity {
-    // a pdf must be chosen from storage
+
+    // User must ensure that both class number and lesson number are entered in the main menu correctly
+    // these two variables will be used to load the correct pdf file
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pdfviewer);
-        new MaterialFilePicker()
-                .withActivity(this)
-                .withRequestCode(1)
-                .withFilter(Pattern.compile(".*\\.pdf$")) // filter names with a regex
-                .withFilterDirectories(true) // directories filterable
-                .withHiddenFiles(true) // show hidden files/folders
-                .start();
-    }
-    // when pdf is chosen, we load pdf in a separate activity
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String filepath = data.getStringExtra(FilePickerActivity.RESULT_FILE_PATH);
-            File file = new File(filepath);
-            PDFView pdf = findViewById(R.id.pdfView);
-            pdf.fromFile(file).enableSwipe(true)
-                    .swipeHorizontal(false)
-                    .enableDoubletap(true)
-                    .defaultPage(0)
-                    .enableAnnotationRendering(false)
-                    .password(null)
-                    .scrollHandle(null)
-                    .enableAntialiasing(true)
-                    .spacing(0)
-                    .autoSpacing(true)
-                    .pageFitPolicy(FitPolicy.WIDTH)
-                    .fitEachPage(false)
-                    .nightMode(true)
-                    .load();
-        }
+
+        // The correct PDF file is found in the Classrooms folder
+        String filepath = Environment.getExternalStorageDirectory().getAbsoluteFile()
+                +"/Classrooms/class"+ classNumber + "/Curriculum/Lesson "+lessonNumber+"/pdf_for_lesson.pdf";
+        File file = new File(filepath);
+        PDFView pdf = findViewById(R.id.pdfView);
+
+        pdf.fromFile(file)
+                .enableSwipe(true) // allows to block changing pages using swipe
+                .swipeHorizontal(false)
+                .enableDoubletap(true)
+                .defaultPage(0)
+                .autoSpacing(false) // add dynamic spacing to fit each page on its own on the screen
+                .fitEachPage(false) // fit each page to the view, else smaller pages are scaled relative to largest page.
+                .pageSnap(false) // snap pages to screen boundaries
+                .pageFling(false) // make a fling change only a single page like ViewPager
+                .nightMode(false) // toggle night mode
+                .load();
     }
 }
